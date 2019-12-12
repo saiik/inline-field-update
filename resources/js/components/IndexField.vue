@@ -40,6 +40,7 @@ export default {
                         }
                     )
                     .then (function (response) {
+                        this.$toasted.show('It worked!', { type: 'success' })
                         vm.loading = false
                         vm.field.value = vm.value
                     })
