@@ -44,6 +44,7 @@ export default {
                         vm.field.value = vm.value
                     })
                     .catch (function (error) {
+                        this.$toasted.show('It failed!', { type: 'error' })
                         vm.loading = false
                         console.log(error);
                     })
