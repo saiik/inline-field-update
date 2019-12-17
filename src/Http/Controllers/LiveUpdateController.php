@@ -4,12 +4,21 @@ namespace Wehaa\Liveupdate\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class LiveUpdateController extends Controller
 {
+    use AuthorizesRequests;
+
     public function update(NovaRequest $request)
     {
         $model = $request->model()->find($request->id);
+        
+        try {
+            $this->authorize('update', $model);
+        } catch(\Exception $e) {
+            throw new \RuntimeException('No access');
+        }
 
         switch($model->attribute->attribute_type ?? 'text') {
             case "text":
