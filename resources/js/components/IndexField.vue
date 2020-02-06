@@ -36,16 +36,22 @@ export default {
                         {
                             id: this.field.id,
                             attribute: this.field.attribute,
-                            value: this.value
+                            value: this.value,
+                            resourceName: this.resourceName,
+                            resourceId: this.resourceId,
+                            field: this.field,
+                            parentId: this.$parent.resource.id.value, 
+                            parentRouterResourceName: this.$parent._routerRoot._route.params.resourceName,
+                            parentRouterResourceId: this.$parent._routerRoot._route.params.resourceId
                         }
                     )
                     .then (function (response) {
-                        this.$toasted.show('It worked!', { type: 'success' })
+                        vm.$toasted.show('It worked!', { type: 'success' })
                         vm.loading = false
                         vm.field.value = vm.value
                     })
                     .catch (function (error) {
-                        this.$toasted.show('It failed!', { type: 'error' })
+                        vm.$toasted.show('It failed!', { type: 'error' })
                         vm.loading = false
                         console.log(error);
                     })
